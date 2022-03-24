@@ -4,6 +4,7 @@
         <input #nameInput type="text" [(ngModel)]="nameToAdd">
         <input type="button" value="Enter Name" (click)="addName()">
         <input type="button" value="Clear Names" (click)="clearNames()">
+        <input type="button" value="Pick Name" (click)="pickName()">
     </div>
 
     <div>
@@ -12,6 +13,9 @@
                 {{ name }}
             </li>
         </ul>
+    </div>
+    <div *ngIf="pickedName">
+        <label>Chosen Name: {{pickedName}}</label>
     </div>
 
     <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
