@@ -9,6 +9,7 @@ export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
 		nameToAdd: string = '';
+		pickedName: string = '';
 		names: string[] = [];
 
 		public nameIsValid(): boolean {
@@ -32,7 +33,14 @@ export class NamePickerComponent implements OnInit {
 
 		public clearNames() {
 			this.nameToAdd = '';
+			this.pickedName = '';
 			this.names = [];
+		}
+
+		public pickName() {
+			let randomNumber = Math.floor(Math.random()*this.names.length);
+			this.pickedName = this.names[randomNumber];
+			console.log(this.pickedName);
 		}
 
 		constructor() { }
