@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class UtilityCardComponent implements OnInit {
 
   @Input() title: string | undefined;
-  @Input() routerLink: string | undefined;
+  @Input() utilityRoute: string | undefined;
 
   constructor() { }
 
