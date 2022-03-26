@@ -19,7 +19,6 @@
         </div>
     </div>
 
-
     <div class="my-8">
         <div class="input-group">
             <input #nameInput type="text" placeholder="Add Name..."
@@ -40,14 +39,27 @@
     </div>
 
     <div class="w-full sm:w-1/2 xl:w-1/3">
+        <div *ngIf="pickedName" class="bg-base-300 w-full mb-4 mx-auto flex justify-center p-10">
+            <span class="text-lg font-medium">{{pickedName}}</span>
+        </div>
         <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
             <div class="shadow-lg rounded-2xl bg-white">
                 <ul>
                     <li class="flex items-center text-gray-600 justify-between py-3 border-b-2 border-gray-100"
                         *ngFor="let name of names">
                         <div class="flex items-center justify-start text-sm">
-                            <span class="mx-4">                                
+                            <span class="mx-4">
                                 {{ name }}
+                            </span>
+                            <span class="mx-4">
+                                <a class="cursor-pointer" (click)="removeName(name)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                        viewBox="0 0 20 20" fill="red">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </a>
                             </span>
                         </div>
                     </li>
@@ -55,8 +67,4 @@
             </div>
         </div>
     </div>
-    <div *ngIf="pickedName">
-        <label>Chosen Name: {{pickedName}}</label>
-    </div>
-
 </div>
