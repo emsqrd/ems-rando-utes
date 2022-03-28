@@ -43,6 +43,14 @@ export class NamePickerComponent implements OnInit {
 			console.log(this.pickedName);
 		}
 
+		public removeName(nameToRemove: string) {
+			var index = this.names.indexOf(nameToRemove);
+
+			if (index > -1) {
+				this.names.splice(index, 1);
+			}
+		}
+
 		constructor() { }
 
 		ngOnInit(): void {
