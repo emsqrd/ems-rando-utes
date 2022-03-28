@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
 		selector: 'app-name-picker',
@@ -8,12 +9,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
-		nameToAdd: string = '';
+		name = new FormControl('');
 		pickedName: string = '';
 		names: string[] = [];
 
 		public nameIsValid(): boolean {
-			if (this.nameToAdd === '' || this.names.indexOf(this.nameToAdd) > -1){
+			if (this.name.value === '' || this.names.indexOf(this.name.value) > -1){
 				return false;
 			}
 
@@ -23,16 +24,15 @@ export class NamePickerComponent implements OnInit {
 		public addName() {
 
 			if (this.nameIsValid()) {
-				this.names?.push(this.nameToAdd);
-				console.log(this.names);
+				this.names?.push(this.name.value);
 			}
 
 			this.nameInput.nativeElement.focus();
-			this.nameToAdd = '';
+			this.name.setValue('');
 		}
 
 		public clearNames() {
-			this.nameToAdd = '';
+			this.name.setValue('');
 			this.pickedName = '';
 			this.names = [];
 		}
@@ -40,7 +40,6 @@ export class NamePickerComponent implements OnInit {
 		public pickName() {
 			let randomNumber = Math.floor(Math.random()*this.names.length);
 			this.pickedName = this.names[randomNumber];
-			console.log(this.pickedName);
 		}
 
 		public removeName(nameToRemove: string) {
