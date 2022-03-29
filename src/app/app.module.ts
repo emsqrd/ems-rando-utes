@@ -7,7 +7,7 @@ import { UtilityCardComponent } from './utility-card/utility-card.component';
 import { NamePickerComponent } from './name-picker/name-picker.component';
 import { NumberPickerComponent } from './number-picker/number-picker.component';
 import { UtilitySelectorComponent } from './utility-selector/utility-selector.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

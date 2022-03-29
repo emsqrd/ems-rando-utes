@@ -1,4 +1,4 @@
-<div class="container mx-auto px-6 py-8">
+<div class="container mx-auto w-full md:w-1/2 px-6 py-8">
 
     <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex-1 min-w-0">
@@ -19,29 +19,28 @@
         </div>
     </div>
 
-    <div class="my-8">
+
+    <div class="w-full md:w-1/2 mx-auto my-8">
+        <div class="bg-base-300 mb-4 text-center p-10">
+            <div class="text-2xl font-medium">And the Winner Is...</div>
+            <div *ngIf="pickedName" class="text-lg font-medium">{{pickedName}}!</div>
+        </div>
         <div class="input-group">
-            <input #nameInput type="text" placeholder="Add Name..."
-                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm"
-                [(ngModel)]="nameToAdd" (keyup.enter)="addName()">
-            <button class="btn btn-square" (click)="addName()">
+            <input #nameInput type="text" placeholder="Add Name..." [(ngModel)]="name"
+                class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm" 
+                (keyup.enter)="addName()">
+            <button class="btn btn-square" (click)="addName()" [disabled]="!name">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
             </button>
         </div>
-    </div>
-
-    <div class="my-8">
-        <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
-        <button class="btn mx-4" (click)="pickName()">Pick Name</button>
-    </div>
-
-    <div class="w-full sm:w-1/2 xl:w-1/3">
-        <div *ngIf="pickedName" class="bg-base-300 w-full mb-4 mx-auto flex justify-center p-10">
-            <span class="text-lg font-medium">{{pickedName}}</span>
+        <div class="my-8">
+            <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
+            <button class="btn mx-4" (click)="pickName()" [disabled]="names.length === 0">Pick Name</button>
         </div>
+        
         <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
             <div class="shadow-lg rounded-2xl bg-white">
                 <ul>

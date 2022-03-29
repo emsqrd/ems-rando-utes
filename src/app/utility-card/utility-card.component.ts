@@ -9,6 +9,7 @@ export class UtilityCardComponent implements OnInit {
 
   @Input() title: string | undefined;
   @Input() utilityRoute: string | undefined;
+  @Input() disableCard: boolean = false;
 
   constructor() { }
 
