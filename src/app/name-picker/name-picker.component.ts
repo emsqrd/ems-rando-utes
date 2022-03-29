@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -12,6 +13,7 @@ export class NamePickerComponent implements OnInit {
 		name: string = '';
 		pickedName: string = '';
 		names: string[] = [];
+		exampleNames: any;
 
 		public nameIsValid(): boolean {
 			
@@ -51,7 +53,7 @@ export class NamePickerComponent implements OnInit {
 			}
 		}
 
-		public getRandomizedList() {
+		public getRandomList(list:string[]) {
 			
 		}
 
@@ -84,13 +86,28 @@ export class NamePickerComponent implements OnInit {
 				'Ronald Weasley',
 			]
 
-			var exampleLists:string[][] = [beatles, tmnt, ghostbusters, hp];
+			this.httpClient.get('assets/example_names.json').subscribe(data => {
+				console.log(data);
+				this.exampleNames = data;
 
-			let randomNumber = Math.floor(Math.random() * exampleLists.length);
-			this.names = exampleLists[randomNumber];
+				var exampleNamesArr = Object.keys(data).map(x => this.exampleNames[x]);
+				console.log(exampleNamesArr);
+				
+				// var exampleLists:string[][] = [beatles, tmnt, ghostbusters, hp];
+				// console.log(exampleLists);
+				
+				let randomNumber = Math.floor(Math.random() * exampleNamesArr.length);
+				console.log(exampleNamesArr[randomNumber]);
+				
+				
+				this.names = exampleNamesArr[randomNumber];
+			});
+
 		}
 
-		constructor() { }
+		constructor(private httpClient: HttpClient) { 
+		
+		}
 
 		ngOnInit(): void {
 			this.loadExampleNames();
