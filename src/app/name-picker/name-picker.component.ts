@@ -58,49 +58,16 @@ export class NamePickerComponent implements OnInit {
 		}
 
 		public loadExampleNames() {
-			
-			var beatles:string[] = [
-				'John',
-				'Paul',
-				'George',
-				'Ringo',
-			]
 
-			var tmnt:string[] = [
-				'Leonardo',
-				'Raphael',
-				'Donatello',
-				'Michelangelo',
-			]
-			
-			var ghostbusters:string[] = [
-				'Peter Venkman',
-				'Ray Stantz',
-				'Egon Spengler',
-				'Winston Zeddemore',
-			]
+			this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
 
-			var hp:string[] = [
-				'Harry Potter',
-				'Hermoine Grainger',
-				'Ronald Weasley',
-			]
+				const keys = Object.keys(data);
 
-			this.httpClient.get('assets/example_names.json').subscribe(data => {
-				console.log(data);
-				this.exampleNames = data;
+				const randIndex = Math.floor(Math.random() * keys.length);
 
-				var exampleNamesArr = Object.keys(data).map(x => this.exampleNames[x]);
-				console.log(exampleNamesArr);
-				
-				// var exampleLists:string[][] = [beatles, tmnt, ghostbusters, hp];
-				// console.log(exampleLists);
-				
-				let randomNumber = Math.floor(Math.random() * exampleNamesArr.length);
-				console.log(exampleNamesArr[randomNumber]);
-				
-				
-				this.names = exampleNamesArr[randomNumber];
+				const randomKey = keys[randIndex];
+
+				this.names = data[randomKey];
 			});
 
 		}

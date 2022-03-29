@@ -1,11 +1,6 @@
-[
-  {
-    "beatles": ["John","Paul","George","Ringo"]
-  },
-  {
-    "tmnt": ["Leonardo","Raphael","Donatello","Michelangelo"]
-  },
-  {
-    "ghostbusters": ["Peter Venkman","Ray Stantz","Egon Spengler","Winston Zeddemore"]
-  }  
-]
+{
+  "beatles": ["John","Paul","George","Ringo"],
+  "tmnt": ["Leonardo","Raphael","Donatello","Michelangelo"],
+  "ghostbusters": ["Peter Venkman","Ray Stantz","Egon Spengler","Winston Zeddemore"],
+  "hp": ["Harry Potter","Hermoine Grainger","Ronald Weasley"]
+}
