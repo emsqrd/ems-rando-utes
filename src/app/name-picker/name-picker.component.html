@@ -26,10 +26,10 @@
             <div *ngIf="pickedName" class="text-lg font-medium">{{pickedName}}!</div>
         </div>
         <div class="input-group">
-            <input #nameInput type="text" placeholder="Add Name..." [formControl]="name"
-                class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm"
+            <input #nameInput type="text" placeholder="Add Name..." [(ngModel)]="name"
+                class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm" 
                 (keyup.enter)="addName()">
-            <button class="btn btn-square" (click)="addName()">
+            <button class="btn btn-square" (click)="addName()" [disabled]="!name">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -38,7 +38,7 @@
         </div>
         <div class="my-8">
             <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
-            <button class="btn mx-4" (click)="pickName()">Pick Name</button>
+            <button class="btn mx-4" (click)="pickName()" [disabled]="names.length === 0">Pick Name</button>
         </div>
         
         <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">

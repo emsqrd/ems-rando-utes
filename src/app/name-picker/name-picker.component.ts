@@ -9,12 +9,13 @@ import { FormControl } from '@angular/forms';
 export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
-		name = new FormControl('');
+		name: string = '';
 		pickedName: string = '';
 		names: string[] = [];
 
 		public nameIsValid(): boolean {
-			if (this.name.value === '' || this.names.indexOf(this.name.value) > -1){
+			
+			if (this.name === '' || this.names.indexOf(this.name) > -1){
 				return false;
 			}
 
@@ -24,15 +25,15 @@ export class NamePickerComponent implements OnInit {
 		public addName() {
 
 			if (this.nameIsValid()) {
-				this.names?.push(this.name.value);
+				this.names?.push(this.name);
 			}
 
 			this.nameInput.nativeElement.focus();
-			this.name.setValue('');
+			this.name = '';
 		}
 
 		public clearNames() {
-			this.name.setValue('');
+			this.name = '';
 			this.pickedName = '';
 			this.names = [];
 		}
@@ -50,9 +51,49 @@ export class NamePickerComponent implements OnInit {
 			}
 		}
 
+		public getRandomizedList() {
+			
+		}
+
+		public loadExampleNames() {
+			
+			var beatles:string[] = [
+				'John',
+				'Paul',
+				'George',
+				'Ringo',
+			]
+
+			var tmnt:string[] = [
+				'Leonardo',
+				'Raphael',
+				'Donatello',
+				'Michelangelo',
+			]
+			
+			var ghostbusters:string[] = [
+				'Peter Venkman',
+				'Ray Stantz',
+				'Egon Spengler',
+				'Winston Zeddemore',
+			]
+
+			var hp:string[] = [
+				'Harry Potter',
+				'Hermoine Grainger',
+				'Ronald Weasley',
+			]
+
+			var exampleLists:string[][] = [beatles, tmnt, ghostbusters, hp];
+
+			let randomNumber = Math.floor(Math.random() * exampleLists.length);
+			this.names = exampleLists[randomNumber];
+		}
+
 		constructor() { }
 
 		ngOnInit(): void {
+			this.loadExampleNames();
 		}
 
 }
