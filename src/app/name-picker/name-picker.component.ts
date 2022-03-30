@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-
 @Component({
 		selector: 'app-name-picker',
 		templateUrl: './name-picker.component.html',
@@ -10,10 +8,11 @@ import { FormControl } from '@angular/forms';
 export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
-		name: string = '';
-		pickedName: string = '';
-		names: string[] = [];
-		exampleNames: any;
+		public name: string = '';
+		public pickedName: string = '';
+		public names: string[] = [];
+		public exampleNames: any;
+		public disableNamePicker: boolean = false;
 
 		public nameIsValid(): boolean {
 			
@@ -22,6 +21,11 @@ export class NamePickerComponent implements OnInit {
 			}
 
 			return true;
+		}
+
+		public namePickerDisableCheck(): void {
+			console.log(this.names.length === 0);
+			this.disableNamePicker = this.names.length === 0;
 		}
 
 		public addName() {
@@ -53,14 +57,10 @@ export class NamePickerComponent implements OnInit {
 			}
 		}
 
-		public getRandomList(list:string[]) {
-			
-		}
-
 		public loadExampleNames() {
-
+			
 			this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
-
+								 
 				const keys = Object.keys(data);
 
 				const randIndex = Math.floor(Math.random() * keys.length);
@@ -72,12 +72,14 @@ export class NamePickerComponent implements OnInit {
 
 		}
 
-		constructor(private httpClient: HttpClient) { 
-		
-		}
+		constructor(private httpClient: HttpClient) { }
 
 		ngOnInit(): void {
 			this.loadExampleNames();
+		}
+
+		ngOnChanges(): void {
+			this.namePickerDisableCheck();
 		}
 
 }
