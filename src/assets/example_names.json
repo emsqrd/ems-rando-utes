@@ -1,7 +1,57 @@
-{
-  "beatles": ["John","Paul","George","Ringo"],
-  "tmnt": ["Leonardo","Raphael","Donatello","Michelangelo"],
-  "ghostbusters": ["Peter Venkman","Ray Stantz","Egon Spengler","Winston Zeddemore"],
-  "hp": ["Harry Potter","Hermoine Grainger","Ronald Weasley"],
-  "letterkenny": ["Wayne","Katy","Daryl","Squirrelly Dan","Glen","Stewart","Reilly","Jonesy","Bonnie McMurray","Tanis"]
-}
+[
+  {
+    "id": 1,
+    "listName": "beatles",
+    "names": [
+      "John",
+      "Paul",
+      "George",
+      "Ringo"
+    ]
+  },
+  {
+    "id": 2,
+    "listName": "tmnt",
+    "names": [
+      "Leonardo",
+      "Raphael",
+      "Donatello",
+      "Michelangelo"
+    ]
+  },
+  {
+    "id": 3,
+    "listName": "ghostbusters",
+    "names": [
+      "Peter Venkman",
+      "Ray Stantz",
+      "Egon Spengler",
+      "Winston Zeddemore"
+    ]
+  },
+  {
+    "id": 4,
+    "listName": "hp",
+    "names": [
+      "Harry Potter",
+      "Hermoine Grainger",
+      "Ronald Weasley"
+    ]
+  },
+  {
+    "id": 5,
+    "listName": "letterkenny",
+    "names": [
+      "Wayne",
+      "Katy",
+      "Daryl",
+      "Squirrelly Dan",
+      "Glen",
+      "Stewart",
+      "Reilly",
+      "Jonesy",
+      "Bonnie McMurray",
+      "Tanis"
+    ]
+  }
+]
