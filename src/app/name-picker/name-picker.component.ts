@@ -1,6 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-
 @Component({
 		selector: 'app-name-picker',
 		templateUrl: './name-picker.component.html',
@@ -9,9 +8,11 @@ import { FormControl } from '@angular/forms';
 export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
-		name: string = '';
-		pickedName: string = '';
-		names: string[] = [];
+		public name: string = '';
+		public pickedName: string = '';
+		public names: string[] = [];
+		public exampleNames: any;
+		public disableNamePicker: boolean = false;
 
 		public nameIsValid(): boolean {
 			
@@ -20,6 +21,11 @@ export class NamePickerComponent implements OnInit {
 			}
 
 			return true;
+		}
+
+		public namePickerDisableCheck(): void {
+			console.log(this.names.length === 0);
+			this.disableNamePicker = this.names.length === 0;
 		}
 
 		public addName() {
@@ -51,49 +57,29 @@ export class NamePickerComponent implements OnInit {
 			}
 		}
 
-		public getRandomizedList() {
-			
-		}
-
 		public loadExampleNames() {
 			
-			var beatles:string[] = [
-				'John',
-				'Paul',
-				'George',
-				'Ringo',
-			]
+			this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
+								 
+				const keys = Object.keys(data);
 
-			var tmnt:string[] = [
-				'Leonardo',
-				'Raphael',
-				'Donatello',
-				'Michelangelo',
-			]
-			
-			var ghostbusters:string[] = [
-				'Peter Venkman',
-				'Ray Stantz',
-				'Egon Spengler',
-				'Winston Zeddemore',
-			]
+				const randIndex = Math.floor(Math.random() * keys.length);
 
-			var hp:string[] = [
-				'Harry Potter',
-				'Hermoine Grainger',
-				'Ronald Weasley',
-			]
+				const randomKey = keys[randIndex];
 
-			var exampleLists:string[][] = [beatles, tmnt, ghostbusters, hp];
+				this.names = data[randomKey];
+			});
 
-			let randomNumber = Math.floor(Math.random() * exampleLists.length);
-			this.names = exampleLists[randomNumber];
 		}
 
-		constructor() { }
+		constructor(private httpClient: HttpClient) { }
 
 		ngOnInit(): void {
 			this.loadExampleNames();
+		}
+
+		ngOnChanges(): void {
+			this.namePickerDisableCheck();
 		}
 
 }
