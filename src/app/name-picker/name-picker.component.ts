@@ -8,13 +8,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class NamePickerComponent implements OnInit {
 
 		@ViewChild('nameInput') nameInput: any;
-		public name: string = '';
-		public pickedName: string = '';
-		public names: string[] = [];
-		public exampleNames: any;
-		public disableNamePicker: boolean = false;
+		name: string = '';
+		pickedName: string = '';
+		names: string[] = [];
+		exampleNames: any;
 
-		public nameIsValid(): boolean {
+		get nameIsValid(): boolean {
 			
 			if (this.name === '' || this.names.indexOf(this.name) > -1){
 				return false;
@@ -23,14 +22,13 @@ export class NamePickerComponent implements OnInit {
 			return true;
 		}
 
-		public namePickerDisableCheck(): void {
-			console.log(this.names.length === 0);
-			this.disableNamePicker = this.names.length === 0;
+		get namePickerIsDisabled(): boolean {
+			return this.names.length === 0;
 		}
 
-		public addName() {
+		addName() {
 
-			if (this.nameIsValid()) {
+			if (this.nameIsValid) {
 				this.names?.push(this.name);
 			}
 
@@ -38,18 +36,18 @@ export class NamePickerComponent implements OnInit {
 			this.name = '';
 		}
 
-		public clearNames() {
+		clearNames() {
 			this.name = '';
 			this.pickedName = '';
 			this.names = [];
 		}
 
-		public pickName() {
+		pickName() {
 			let randomNumber = Math.floor(Math.random()*this.names.length);
 			this.pickedName = this.names[randomNumber];
 		}
 
-		public removeName(nameToRemove: string) {
+		removeName(nameToRemove: string) {
 			var index = this.names.indexOf(nameToRemove);
 
 			if (index > -1) {
@@ -57,7 +55,7 @@ export class NamePickerComponent implements OnInit {
 			}
 		}
 
-		public loadExampleNames() {
+		loadExampleNames() {
 			
 			this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
 								 
@@ -68,6 +66,7 @@ export class NamePickerComponent implements OnInit {
 				const randomKey = keys[randIndex];
 
 				this.names = data[randomKey];
+				console.log('names loaded');
 			});
 
 		}
@@ -76,10 +75,6 @@ export class NamePickerComponent implements OnInit {
 
 		ngOnInit(): void {
 			this.loadExampleNames();
-		}
-
-		ngOnChanges(): void {
-			this.namePickerDisableCheck();
 		}
 
 }
