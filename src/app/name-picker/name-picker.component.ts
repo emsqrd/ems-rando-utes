@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NameList } from '../core/NameList';
 @Component({
 		selector: 'app-name-picker',
 		templateUrl: './name-picker.component.html',
@@ -57,15 +58,13 @@ export class NamePickerComponent implements OnInit {
 
 		loadExampleNames() {
 			
-			this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
+			this.httpClient.get<Array<NameList>>('assets/example_names.json').subscribe((data) => {
 								 
-				const keys = Object.keys(data);
+				const randIndex = Math.floor(Math.random() * data.length);
 
-				const randIndex = Math.floor(Math.random() * keys.length);
+				const randomKey = data[randIndex].names;
 
-				const randomKey = keys[randIndex];
-
-				this.names = data[randomKey];
+				this.names = randomKey;
 				console.log('names loaded');
 			});
 
