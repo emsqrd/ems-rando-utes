@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NamePickerComponent } from './name-picker.component';
@@ -8,7 +9,9 @@ describe('NamePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NamePickerComponent ]
+      declarations: [ NamePickerComponent ],
+      imports: [ HttpClientModule ],
+      providers: [ HttpClient ]
     })
     .compileComponents();
   });
