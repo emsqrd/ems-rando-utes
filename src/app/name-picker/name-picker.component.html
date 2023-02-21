@@ -34,7 +34,7 @@
         </div>
         <div class="my-8">
             <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
-            <label for="name-picker-modal" class="btn" (click)="pickName()">Pick Name</label>
+            <label for="name-picker-modal" class="btn" (click)="pickName()" [ngClass]="{'btn-disabled': namePickerIsDisabled}">Pick Name</label>
         </div>
 
         <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
@@ -70,6 +70,7 @@
             </div>
             <div class="modal-action">
                 <label for="name-picker-modal" class="btn">Close</label>
+                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove Name</label>
             </div>
         </div>
     </div>
