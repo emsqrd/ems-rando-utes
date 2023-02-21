@@ -21,13 +21,9 @@
 
 
     <div class="w-full md:w-1/2 mx-auto my-8">
-        <div class="bg-base-300 mb-4 text-center p-10">
-            <div class="text-2xl font-medium">And the Winner Is...</div>
-            <div *ngIf="pickedName" class="text-lg font-medium">{{pickedName}}!</div>
-        </div>
         <div class="input-group">
             <input #nameInput type="text" placeholder="Add Name..." [(ngModel)]="name"
-                class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm" 
+                class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm"
                 (keyup.enter)="addName()">
             <button class="btn btn-square" (click)="addName()" [disabled]="!name">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -38,14 +34,13 @@
         </div>
         <div class="my-8">
             <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
-            <button class="btn mx-4" (click)="pickName()" [disabled]="namePickerIsDisabled">Pick Name</button>
+            <label for="name-picker-modal" class="btn" (click)="pickName()">Pick Name</label>
         </div>
-        
+
         <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
             <div class="shadow-lg rounded-2xl bg-white">
                 <ul>
-                    <li class="text-gray-600 py-3 border-b-2 border-gray-100"
-                        *ngFor="let name of names">
+                    <li class="text-gray-600 py-3 border-b-2 border-gray-100" *ngFor="let name of names">
                         <div class="flex justify-between text-sm">
                             <span class="mx-4">
                                 {{ name }}
@@ -63,6 +58,18 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </div>
+    <input type="checkbox" id="name-picker-modal" class="modal-toggle" />
+    <div class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div class="text-xl font-medium">And the Winner Is...</div>
+            <div class="mb-4 text-center p-5">
+                <div *ngIf="pickedName" class="text-4xl font-medium">{{pickedName}}!</div>
+            </div>
+            <div class="modal-action">
+                <label for="name-picker-modal" class="btn">Close</label>
             </div>
         </div>
     </div>
