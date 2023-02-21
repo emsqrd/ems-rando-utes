@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UtilitySelectorComponent } from '../utility-selector/utility-selector.component';
 
 import { UtilityCardComponent } from './utility-card.component';
 
@@ -8,7 +9,7 @@ describe('UtilityCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UtilityCardComponent ]
+      declarations: [ UtilityCardComponent, UtilitySelectorComponent ]
     })
     .compileComponents();
   });
