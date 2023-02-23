@@ -9,6 +9,7 @@ import { NumberPickerComponent } from './number-picker/number-picker.component';
 import { UtilitySelectorComponent } from './utility-selector/utility-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WheelSpinnerComponent } from './wheel-spinner/wheel-spinner.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     UtilityCardComponent,
     NamePickerComponent,
     NumberPickerComponent,
-    UtilitySelectorComponent
+    UtilitySelectorComponent,
+    WheelSpinnerComponent,
   ],
   imports: [
     BrowserModule,
