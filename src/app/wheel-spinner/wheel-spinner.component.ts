@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'wheel-spinner',
@@ -8,6 +8,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 
 export class WheelSpinnerComponent {
 
+	@Input() names: string[] = [];
 	@ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
 	
 	slices: any = [
@@ -68,6 +69,7 @@ export class WheelSpinnerComponent {
 	constructor (private renderer: Renderer2) { }
 	
 	ngAfterViewInit() {
+		console.log(this.names);
 		this.drawWheel();
 		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
 	}

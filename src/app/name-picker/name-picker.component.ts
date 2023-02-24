@@ -12,6 +12,7 @@ export class NamePickerComponent implements OnInit {
 	pickedName: string = '';
 	names: string[] = [];
 	exampleNames: any;
+	blahNames: string[] = ["John","Paul","George","Ringo"];
 
 	get nameIsValid(): boolean {
 		
