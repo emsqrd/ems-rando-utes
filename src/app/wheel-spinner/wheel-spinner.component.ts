@@ -76,7 +76,7 @@ export class WheelSpinnerComponent {
 	
 
 	ngOnChanges() {		
-
+		console.log(this.sliceItems);
 		if (this.sliceItems.length > 0){
 			this.drawWheel();
 		}

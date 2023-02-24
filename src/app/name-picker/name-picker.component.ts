@@ -29,7 +29,7 @@ export class NamePickerComponent implements OnInit {
 	addName() {
 
 		if (this.nameIsValid) {
-			this.names?.push(this.name);
+			this.names = [...this.names, this.name];
 		}
 
 		this.nameInput.nativeElement.focus();
