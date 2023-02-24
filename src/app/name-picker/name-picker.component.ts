@@ -39,7 +39,8 @@ export class NamePickerComponent implements OnInit {
 	clearNames() {
 		this.name = '';
 		this.pickedName = '';
-		this.names = [];
+		this.names.splice(0, this.names.length);
+		this.names = [...this.names];
 	}
 
 	pickName() {
@@ -52,6 +53,7 @@ export class NamePickerComponent implements OnInit {
 
 		if (index > -1) {
 			this.names.splice(index, 1);
+			this.names = [...this.names];
 		}
 	}
 
