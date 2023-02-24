@@ -65,8 +65,7 @@ export class NamePickerComponent implements OnInit {
 
 			const randomKey = keys[randIndex];
 
-			var exampleNames = data[randomKey];
-			this.names = exampleNames;
+			this.names = data[randomKey];
 			
 		});
 

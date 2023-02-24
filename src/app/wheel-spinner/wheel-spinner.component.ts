@@ -19,6 +19,8 @@ export class WheelSpinnerComponent {
 		{ color: 'Purple' },
 	];
 
+	nameSlices: any = [];
+
 	cumulativePercent: number = 0;
 
 	innerHtml: string = '';
@@ -37,9 +39,9 @@ export class WheelSpinnerComponent {
 
 	drawWheel() {
 
-		const percent = 1 / this.slices.length;
+		const percent = 1 / this.sliceItems.length;
 
-		this.slices.forEach((slice: { color: string; }) => {
+		this.sliceItems.forEach(() => {
 
 			const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
 
@@ -55,7 +57,8 @@ export class WheelSpinnerComponent {
 				`L 0 0`,
 			].join(' ');
 
-			var newPath = `<path d="${pathData}" fill="${slice.color}"></path>`;
+			var randomColor = Math.floor(Math.random()*16777215).toString(16);
+			var newPath = `<path d="${pathData}" fill="#${randomColor}"></path>`;
 			this.innerHtml += newPath;
 
 			// why doesn't this work?
@@ -65,16 +68,24 @@ export class WheelSpinnerComponent {
 			// this.renderer.appendChild(this.svgContainer.nativeElement, pathEl);
 			
 		});
+		
+		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
 	}
 
 	constructor (private renderer: Renderer2) { }
 	
+
+	ngOnChanges() {		
+
+		if (this.sliceItems.length > 0){
+			this.drawWheel();
+		}
+
+	}
+
 	ngOnInit() {
-		console.log(this.sliceItems);
 	}
 
 	ngAfterViewInit() {
-		this.drawWheel();
-		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
 	}
 }
