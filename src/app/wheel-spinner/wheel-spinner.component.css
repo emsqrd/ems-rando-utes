@@ -1,0 +1,14 @@
+@keyframes spin-wheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+.spin-wheel {
+  animation: spin-wheel 1000ms;
+  animation-timing-function: linear;
+  animation-duration: 3s;
+}

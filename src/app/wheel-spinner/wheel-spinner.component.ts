@@ -28,10 +28,19 @@ export class WheelSpinnerComponent implements OnInit {
 		return [x, y];
 	}
 
-	addPath() {
+	createWheel() {
 		const path = this.renderer.createElement('path');
 		console.log(this.svgContainer.nativeElement);
 		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.spinnerWheelSvg);
+	}
+
+	spinWheel() {
+		this.renderer.removeClass(this.svgContainer.nativeElement, 'spin-wheel');
+		this.renderer.addClass(this.svgContainer.nativeElement, 'spin-wheel');
+	}
+
+	resetWheel() {
+		this.renderer.removeClass(this.svgContainer.nativeElement, 'spin-wheel');
 	}
 
 	constructor (private renderer: Renderer2, private el: ElementRef) { }
@@ -41,7 +50,7 @@ export class WheelSpinnerComponent implements OnInit {
 	}
 	
 	ngAfterViewInit() {
-		this.addPath();
+		this.createWheel();
 	}
 
 }
