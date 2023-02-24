@@ -11,7 +11,6 @@ export class NamePickerComponent implements OnInit {
 	name: string = '';
 	pickedName: string = '';
 	names: string[] = [];
-	exampleNames: any;
 	blahNames: string[] = ["John","Paul","George","Ringo"];
 
 	get nameIsValid(): boolean {
@@ -66,7 +65,8 @@ export class NamePickerComponent implements OnInit {
 
 			const randomKey = keys[randIndex];
 
-			this.names = data[randomKey];
+			var exampleNames = data[randomKey];
+			this.names = exampleNames;
 			
 		});
 

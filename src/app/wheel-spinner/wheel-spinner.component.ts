@@ -8,7 +8,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 
 export class WheelSpinnerComponent {
 
-	@Input() names: string[] = [];
+	@Input() sliceItems: string[] = [];
 	@ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
 	
 	slices: any = [
@@ -16,6 +16,7 @@ export class WheelSpinnerComponent {
 		{ color: 'Green' },
 		{ color: 'Red' },
 		{ color: 'Yellow' },
+		{ color: 'Purple' },
 	];
 
 	cumulativePercent: number = 0;
@@ -68,8 +69,11 @@ export class WheelSpinnerComponent {
 
 	constructor (private renderer: Renderer2) { }
 	
+	ngOnInit() {
+		console.log(this.sliceItems);
+	}
+
 	ngAfterViewInit() {
-		console.log(this.names);
 		this.drawWheel();
 		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
 	}
