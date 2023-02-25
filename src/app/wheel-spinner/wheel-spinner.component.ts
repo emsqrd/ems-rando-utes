@@ -9,7 +9,6 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 export class WheelSpinnerComponent {
 
 	@Input() sliceItems: string[] = [];
-	@Input() showDefaultWheel: boolean = false;
 	@ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
 	
 	slices: any = [
@@ -24,8 +23,6 @@ export class WheelSpinnerComponent {
 
 	cumulativePercent: number = 0;
 
-	innerHtml: string = '';
-
 	spinnerWheelSvg = `<path d="M 1 0 A 1 1 0 0 1 6.123233995736766e-17 1 L 0 0" fill="Blue"></path>
   <path d="M 6.123233995736766e-17 1 A 1 1 0 0 1 -1 1.2246467991473532e-16 L 0 0" fill="Green"></path>
   <path d="M -1 1.2246467991473532e-16 A 1 1 0 0 1 -1.8369701987210297e-16 -1 L 0 0" fill="Red"></path>
@@ -38,47 +35,54 @@ export class WheelSpinnerComponent {
 		return [x, y];
 	}
 
-	drawWheel() {
+	getSlicePath(percent: number, fill?: string): string {
+		const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
 
-		const percent = 1 / this.sliceItems.length;
+		this.cumulativePercent += percent;
 
-		this.sliceItems.forEach(() => {
+		const [endX, endY] = this.getCoordinatesForPercent(this.cumulativePercent);
 
-			const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
+		const largeArcFlag = percent > .5 ? 1 : 0;
 
-			this.cumulativePercent += percent;
+		const pathData = [
+			`M ${startX} ${startY}`,
+			`A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
+			`L 0 0`,
+		].join(' ');
 
-			const [endX, endY] = this.getCoordinatesForPercent(this.cumulativePercent);
-
-			const largeArcFlag = percent > .5 ? 1 : 0;
-
-			const pathData = [
-				`M ${startX} ${startY}`,
-				`A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
-				`L 0 0`,
-			].join(' ');
-
-			var randomColor = Math.floor(Math.random()*16777215).toString(16);
-			var newPath = `<path d="${pathData}" fill="#${randomColor}"></path>`;
-			this.innerHtml += newPath;
-
-			// why doesn't this work?
-			// const pathEl = this.renderer.createElement('path');
-			// this.renderer.setAttribute(pathEl, 'd', pathData);
-			// this.renderer.setAttribute(pathEl, 'fill', slice.color);
-			// this.renderer.appendChild(this.svgContainer.nativeElement, pathEl);
-		});		
-		
-		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
+		var randomColor = Math.floor(Math.random()*16777215).toString(16);
+		var path = `<path d="${pathData}" fill="#${fill ?? randomColor}"></path>`;
+		return path;
 	}
 
-	constructor (private renderer: Renderer2) { }
+	drawWheel() {
+		
+		var wheelInnerHtml: string = '';
+		
+		if (this.sliceItems.length > 0) {
+				
+			const percent = 1 / this.sliceItems.length;
+
+			this.sliceItems.forEach(() => {
+
+				wheelInnerHtml += this.getSlicePath(percent);
+
+			});		
+		} else {
+			wheelInnerHtml = this.getSlicePath(100, 'Black');
+		}
+
+		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', wheelInnerHtml);
+	}
+
+	constructor (private renderer: Renderer2, private el: ElementRef) { }
 	
 
 	ngOnChanges() {		
-		if (this.sliceItems.length > 0){
-			this.drawWheel();
-		} 
+		
+		if (this.svgContainer !== undefined){			
+				this.drawWheel();
+		}
 	}
 
 	ngOnInit() {

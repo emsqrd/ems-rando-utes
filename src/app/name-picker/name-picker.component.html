@@ -22,7 +22,7 @@
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 mx-auto my-8 ">
         <div>
-            <wheel-spinner [sliceItems]="names" [showDefaultWheel]="showDefaultWheel"></wheel-spinner>
+            <wheel-spinner [sliceItems]="names"></wheel-spinner>
         </div>
         <div>
             <div class="input-group">
@@ -80,8 +80,7 @@
             </div>
             <div class="modal-action">
                 <label for="name-picker-modal" class="btn">Close</label>
-                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove
-                    Name</label>
+                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove Name</label>
             </div>
         </div>
     </div>
