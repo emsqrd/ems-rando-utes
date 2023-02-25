@@ -22,7 +22,7 @@
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 mx-auto my-8 ">
         <div>
-            <wheel-spinner></wheel-spinner>
+            <wheel-spinner [sliceItems]="names"></wheel-spinner>
         </div>
         <div>
             <div class="input-group">
@@ -37,9 +37,11 @@
                 </button>
             </div>
             <div class="my-8">
-                <button class="btn mx-4" (click)="clearNames()">Clear Names</button>
+                <button class="btn mx-4" (click)="clearNames()" [ngClass]="{'btn-disabled': clearNamesIsDisabled}">Clear Names</button>
                 <label for="name-picker-modal" class="btn" (click)="pickName()"
-                    [ngClass]="{'btn-disabled': namePickerIsDisabled}">Pick Name</label>
+                    [ngClass]="{'btn-disabled': namePickerIsDisabled}">Pick Name
+                </label>
+                <button class="btn m-4 lg:m-4" (click)="loadExampleNames()">New Examples</button>
             </div>
 
             <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
@@ -78,8 +80,7 @@
             </div>
             <div class="modal-action">
                 <label for="name-picker-modal" class="btn">Close</label>
-                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove
-                    Name</label>
+                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove Name</label>
             </div>
         </div>
     </div>

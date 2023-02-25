@@ -3,5 +3,7 @@
   "tmnt": ["Leonardo","Raphael","Donatello","Michelangelo"],
   "ghostbusters": ["Peter Venkman","Ray Stantz","Egon Spengler","Winston Zeddemore"],
   "hp": ["Harry Potter","Hermoine Grainger","Ronald Weasley"],
-  "letterkenny": ["Wayne","Katy","Daryl","Squirrelly Dan","Glen","Stewart","Reilly","Jonesy","Bonnie McMurray","Tanis"]
+  "letterkenny": ["Wayne","Katy","Daryl","Squirrelly Dan","Glen","Stewart","Reilly","Jonesy","Bonnie McMurray","Tanis"],
+  "food": ["Cheeseburger", "Pizza", "Sandwhich", "Calzone", "Spaghetti", "Soup", "Fish Fry", "Grilled Chicken"],
+  "greek_gods": ["Zeus", "Artemis", "Aphrodite", "Ares", "Hermes", "Poseidon"]
 }

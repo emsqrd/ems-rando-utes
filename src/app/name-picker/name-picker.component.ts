@@ -11,7 +11,6 @@ export class NamePickerComponent implements OnInit {
 	name: string = '';
 	pickedName: string = '';
 	names: string[] = [];
-	exampleNames: any;
 
 	get nameIsValid(): boolean {
 		
@@ -26,10 +25,14 @@ export class NamePickerComponent implements OnInit {
 		return this.names.length === 0;
 	}
 
+	get clearNamesIsDisabled(): boolean {
+		return this.names.length === 0;
+	}
+
 	addName() {
 
 		if (this.nameIsValid) {
-			this.names?.push(this.name);
+			this.names = [...this.names, this.name];
 		}
 
 		this.nameInput.nativeElement.focus();
@@ -39,7 +42,8 @@ export class NamePickerComponent implements OnInit {
 	clearNames() {
 		this.name = '';
 		this.pickedName = '';
-		this.names = [];
+		this.names.splice(0, this.names.length);
+		this.names = [...this.names];
 	}
 
 	pickName() {
@@ -52,7 +56,9 @@ export class NamePickerComponent implements OnInit {
 
 		if (index > -1) {
 			this.names.splice(index, 1);
+			this.names = [...this.names];
 		}
+
 	}
 
 	loadExampleNames() {
