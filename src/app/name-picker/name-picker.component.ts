@@ -11,7 +11,7 @@ export class NamePickerComponent implements OnInit {
 	name: string = '';
 	pickedName: string = '';
 	names: string[] = [];
-	blahNames: string[] = ["John","Paul","George","Ringo"];
+	showDefaultWheel: boolean = false;
 
 	get nameIsValid(): boolean {
 		
@@ -26,9 +26,14 @@ export class NamePickerComponent implements OnInit {
 		return this.names.length === 0;
 	}
 
+	get clearNamesIsDisabled(): boolean {
+		return this.names.length === 0;
+	}
+
 	addName() {
 
 		if (this.nameIsValid) {
+			this.showDefaultWheel = false;
 			this.names = [...this.names, this.name];
 		}
 
@@ -41,6 +46,7 @@ export class NamePickerComponent implements OnInit {
 		this.pickedName = '';
 		this.names.splice(0, this.names.length);
 		this.names = [...this.names];
+		this.showDefaultWheel = true;
 	}
 
 	pickName() {
@@ -55,9 +61,15 @@ export class NamePickerComponent implements OnInit {
 			this.names.splice(index, 1);
 			this.names = [...this.names];
 		}
+
+		if (this.names.length === 0) {
+			this.showDefaultWheel = true;
+		}
 	}
 
 	loadExampleNames() {
+
+		this.showDefaultWheel = false;
 		
 		this.httpClient.get<{[key:string]: string[]}>('assets/example_names.json').subscribe((data) => {
 								

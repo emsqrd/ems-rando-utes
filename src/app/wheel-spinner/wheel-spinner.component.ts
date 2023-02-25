@@ -9,6 +9,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 export class WheelSpinnerComponent {
 
 	@Input() sliceItems: string[] = [];
+	@Input() showDefaultWheel: boolean = false;
 	@ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
 	
 	slices: any = [
@@ -66,8 +67,7 @@ export class WheelSpinnerComponent {
 			// this.renderer.setAttribute(pathEl, 'd', pathData);
 			// this.renderer.setAttribute(pathEl, 'fill', slice.color);
 			// this.renderer.appendChild(this.svgContainer.nativeElement, pathEl);
-			
-		});
+		});		
 		
 		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', this.innerHtml);
 	}
@@ -76,11 +76,9 @@ export class WheelSpinnerComponent {
 	
 
 	ngOnChanges() {		
-		console.log(this.sliceItems);
 		if (this.sliceItems.length > 0){
 			this.drawWheel();
-		}
-
+		} 
 	}
 
 	ngOnInit() {
