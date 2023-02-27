@@ -98,7 +98,7 @@ export class WheelSpinnerComponent {
 			});		
 		} else {
 			sliceCount++;
-			this.drawSlice(1, sliceCount, .5, 'DFEEFC');
+			this.drawSlice(1, sliceCount, .5, '', 'DFEEFC');
 		}
 
 		wheelInnerHtml += '<g>';
