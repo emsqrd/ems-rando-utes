@@ -15,9 +15,9 @@ export class WheelSpinnerComponent {
 	private defsPathInnerHtml: string = '';
 	private textPathGroupInnerHtml: string = '';
 
-	getCoordinatesForPercent(percent: number) {
-		const x = Math.cos(2 * Math.PI * percent) * 200;
-		const y = Math.sin(2 * Math.PI * percent) * 200;
+	getCoordinatesForPercent(percent: number, radius: number) {
+		const x = Math.cos(2 * Math.PI * percent) * radius;
+		const y = Math.sin(2 * Math.PI * percent) * radius;
 	
 		return [x, y];
 	}
@@ -25,17 +25,18 @@ export class WheelSpinnerComponent {
 	drawSlice(slicePercent: number, centerSlicePercent: number, sliceCount: number, sliceItemName?: string, fill?: string) {
 
 		// starting coordinates
-		const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
+		const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent, 200);
 
 		this.cumulativePercent += centerSlicePercent;
 
 		// center line coordinates
-		const [centerX, centerY] = this.getCoordinatesForPercent(this.cumulativePercent);
+		const [textPathStartX, textPathStartY] = this.getCoordinatesForPercent(this.cumulativePercent, 180);
+		const [textPathEndX, textPathEndY] = this.getCoordinatesForPercent(this.cumulativePercent, 20);
 		
 		this.cumulativePercent += centerSlicePercent;
 
 		// ending coordinates
-		const [endX, endY] = this.getCoordinatesForPercent(this.cumulativePercent);
+		const [endX, endY] = this.getCoordinatesForPercent(this.cumulativePercent, 200);
 
 		const largeArcFlag = slicePercent > .5 ? 1 : 0;
 
@@ -49,12 +50,12 @@ export class WheelSpinnerComponent {
 		console.log(`Slice Percent: ${slicePercent}`);
 		console.log(`Center Slice Percent: ${centerSlicePercent}`);
 		console.log(`Starting: ${[startX, startY]}`);
-		console.log(`Center: ${[centerX, centerY]}`);
+		console.log(`Center: ${[textPathStartX, textPathStartY]}`);
 		console.log(`Ending: ${[endX, endY]}`);
 
 		const defTextPath = [
-			`M ${centerX} ${centerY}`,
-			`L 0 0`,
+			`M ${textPathStartX} ${textPathStartY}`,
+			`L ${textPathEndX} ${textPathEndY}`,
 		].join(' ');
 
 		var randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -65,7 +66,7 @@ export class WheelSpinnerComponent {
 		`;
 
 		this.textPathGroupInnerHtml += `
-			<text font-size="">
+			<text text-anchor="start">
 				<textPath href="#textPath-${sliceCount}">
 					<tspan fill="white" alignment-baseline="middle">${sliceItemName}</tspan>
 				</textPath>
