@@ -16,13 +16,13 @@ export class WheelSpinnerComponent {
 	private textPathGroupInnerHtml: string = '';
 
 	getCoordinatesForPercent(percent: number) {
-		const x = Math.cos(2 * Math.PI * percent);
-		const y = Math.sin(2 * Math.PI * percent);
-		
+		const x = Math.cos(2 * Math.PI * percent) * 200;
+		const y = Math.sin(2 * Math.PI * percent) * 200;
+	
 		return [x, y];
 	}
 
-	drawSlice(slicePercent: number, centerSlicePercent: number, sliceCount: number, fill?: string) {
+	drawSlice(slicePercent: number, centerSlicePercent: number, sliceCount: number, sliceItemName?: string, fill?: string) {
 
 		// starting coordinates
 		const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
@@ -41,17 +41,16 @@ export class WheelSpinnerComponent {
 
 		const slicePath = [
 			`M ${startX} ${startY}`,
-			`A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
+			`A 200 200 0 ${largeArcFlag} 1 ${endX} ${endY}`,
 			`L 0 0`,
 		].join(' ');
 
-		// if (slicePercent === .25) {
-		// 	console.log(`Slice Percent: ${slicePercent}`);
-		// 	console.log(`Center Slice Percent: ${centerSlicePercent}`);
-		// 	console.log(`Starting: ${[startX, startY]}`);
-		// 	console.log(`Center: ${[centerX, centerY]}`);
-		// 	console.log(`Ending: ${[endX, endY]}`);
-		// }
+		console.log(`Slice Count: ${sliceCount}`);
+		console.log(`Slice Percent: ${slicePercent}`);
+		console.log(`Center Slice Percent: ${centerSlicePercent}`);
+		console.log(`Starting: ${[startX, startY]}`);
+		console.log(`Center: ${[centerX, centerY]}`);
+		console.log(`Ending: ${[endX, endY]}`);
 
 		const defTextPath = [
 			`M ${centerX} ${centerY}`,
@@ -66,9 +65,9 @@ export class WheelSpinnerComponent {
 		`;
 
 		this.textPathGroupInnerHtml += `
-			<text font-size=".125">
+			<text font-size="">
 				<textPath href="#textPath-${sliceCount}">
-					<tspan fill="white" alignment-baseline="middle">Bob</tspan>
+					<tspan fill="white" alignment-baseline="middle">${sliceItemName}</tspan>
 				</textPath>
 			</text>
 		`;
@@ -84,14 +83,16 @@ export class WheelSpinnerComponent {
 		this.cumulativePercent = 0;
 		var sliceCount: number = 0;
 
+		console.clear();
+
 		if (this.sliceItems.length > 0) {
 			
 			const slicePercent = 1 / this.sliceItems.length;
 			const centerSlicePercent = 1 / (this.sliceItems.length * 2);
 			
-			this.sliceItems.forEach(() => {
+			this.sliceItems.forEach((sliceItem) => {
 				sliceCount++;
-				this.drawSlice(slicePercent, centerSlicePercent, sliceCount);
+				this.drawSlice(slicePercent, centerSlicePercent, sliceCount, sliceItem);
 				
 			});		
 		} else {
