@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Item } from '../core/Item';
+import { Item } from '../core/models/Item';
 @Component({
 	selector: 'app-item-picker',
 	templateUrl: './item-picker.component.html',

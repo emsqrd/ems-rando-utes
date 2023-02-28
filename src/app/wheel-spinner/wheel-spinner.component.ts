@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Item } from '../core/Item';
+import { Item } from '../core/models/Item';
 
 @Component({
 	selector: 'wheel-spinner',
