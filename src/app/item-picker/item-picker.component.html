@@ -2,7 +2,7 @@
 
     <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex-1 min-w-0">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Name Picker</h2>
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Wheel Spinner</h2>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
             <span class="sm:ml-3">
@@ -22,14 +22,14 @@
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 mx-auto my-8 ">
         <div>
-            <wheel-spinner [sliceItems]="names"></wheel-spinner>
+            <wheel-spinner [sliceItems]="items"></wheel-spinner>
         </div>
         <div>
             <div class="input-group">
-                <input #nameInput type="text" placeholder="Add Name..." [(ngModel)]="name"
+                <input #itemInput type="text" placeholder="Add Item..." [(ngModel)]="newItemName"
                     class=" focus:ring-indigo-500 focus:border-indigo-500 w-full pl-7 pr-12 border-gray-300 rounded-md max-w-sm"
-                    (keyup.enter)="addName()">
-                <button class="btn btn-square" (click)="addName()" [disabled]="!name">
+                    (keyup.enter)="addItem()">
+                <button class="btn btn-square" (click)="addItem()" [disabled]="!newItemName">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -37,23 +37,23 @@
                 </button>
             </div>
             <div class="my-8">
-                <button class="btn mx-4" (click)="clearNames()" [ngClass]="{'btn-disabled': clearNamesIsDisabled}">Clear Names</button>
-                <label for="name-picker-modal" class="btn" (click)="pickName()"
-                    [ngClass]="{'btn-disabled': namePickerIsDisabled}">Pick Name
+                <button class="btn mx-4" (click)="clearItems()" [ngClass]="{'btn-disabled': clearItemsIsDisabled}">Clear Items</button>
+                <label for="winner-picker-modal" class="btn" (click)="pickWinningItem()"
+                    [ngClass]="{'btn-disabled': pickWinnerIsDisabled}">Pick Winner
                 </label>
-                <button class="btn m-4 lg:m-4" (click)="loadExampleNames()">New Examples</button>
+                <button class="btn m-4 lg:m-4" (click)="loadExampleItems()">New Examples</button>
             </div>
 
             <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
                 <div class="shadow-lg rounded-2xl bg-white">
                     <ul>
-                        <li class="text-gray-600 py-3 border-b-2 border-gray-100" *ngFor="let name of names">
+                        <li class="text-gray-600 py-3 border-b-2 border-gray-100" *ngFor="let item of items">
                             <div class="flex justify-between text-sm">
                                 <span class="mx-4">
-                                    {{ name }}
+                                    {{ item.itemName }}
                                 </span>
                                 <span class="mx-4">
-                                    <a class="cursor-pointer" (click)="removeName(name)">
+                                    <a class="cursor-pointer" (click)="removeItem(item)">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -70,17 +70,17 @@
         </div>
     </div>
 
-    <!-- name picker modal -->
-    <input type="checkbox" id="name-picker-modal" class="modal-toggle" />
+    <!-- winner item picker modal -->
+    <input type="checkbox" id="winner-picker-modal" class="modal-toggle" />
     <div class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
             <div class="text-xl font-medium">And the Winner Is...</div>
             <div class="mb-4 text-center p-5">
-                <div *ngIf="pickedName" class="text-4xl font-medium">{{pickedName}}!</div>
+                <div *ngIf="pickedItem" class="text-4xl font-medium">{{pickedItem.itemName}}!</div>
             </div>
             <div class="modal-action">
-                <label for="name-picker-modal" class="btn">Close</label>
-                <label for="name-picker-modal" class="btn btn-primary" (click)="removeName(pickedName)">Remove Name</label>
+                <label for="winner-picker-modal" class="btn">Close</label>
+                <label for="winner-picker-modal" class="btn btn-primary" (click)="removeItem(pickedItem)">Remove</label>
             </div>
         </div>
     </div>
