@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtilityCardComponent } from './utility-card/utility-card.component';
-import { NamePickerComponent } from './name-picker/name-picker.component';
+import { ItemPickerComponent } from './item-picker/item-picker.component';
 import { NumberPickerComponent } from './number-picker/number-picker.component';
 import { UtilitySelectorComponent } from './utility-selector/utility-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { WheelSpinnerComponent } from './wheel-spinner/wheel-spinner.component';
   declarations: [
     AppComponent,
     UtilityCardComponent,
-    NamePickerComponent,
+    ItemPickerComponent,
     NumberPickerComponent,
     UtilitySelectorComponent,
     WheelSpinnerComponent,

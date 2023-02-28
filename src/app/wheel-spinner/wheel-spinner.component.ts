@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Item } from '../core/Item';
 
 @Component({
 	selector: 'wheel-spinner',
@@ -7,7 +8,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 })
 export class WheelSpinnerComponent {
 
-	@Input() sliceItems: string[] = [];
+	@Input() sliceItems: Item[] = [new Item()];
 	@ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
 	
 	private cumulativePercent: number = 0;
@@ -22,7 +23,7 @@ export class WheelSpinnerComponent {
 		return [x, y];
 	}
 
-	drawSlice(slicePercent: number, centerSlicePercent: number, sliceCount: number, sliceItemName?: string, fill?: string) {
+	drawSlice(slicePercent: number, centerSlicePercent: number, sliceCount: number, sliceItem: Item) {
 
 		// starting coordinates
 		const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent, 200);
@@ -46,20 +47,12 @@ export class WheelSpinnerComponent {
 			`L 0 0`,
 		].join(' ');
 
-		console.log(`Slice Count: ${sliceCount}`);
-		console.log(`Slice Percent: ${slicePercent}`);
-		console.log(`Center Slice Percent: ${centerSlicePercent}`);
-		console.log(`Starting: ${[startX, startY]}`);
-		console.log(`Center: ${[textPathStartX, textPathStartY]}`);
-		console.log(`Ending: ${[endX, endY]}`);
-
 		const defTextPath = [
 			`M ${textPathStartX} ${textPathStartY}`,
 			`L ${textPathEndX} ${textPathEndY}`,
 		].join(' ');
 
-		var randomColor = Math.floor(Math.random()*16777215).toString(16);
-		this.slicesGroupInnerHtml += `<path d="${slicePath}" fill="#${fill ?? randomColor}"></path>`;
+		this.slicesGroupInnerHtml += `<path d="${slicePath}" fill="${sliceItem.itemSliceColor}"></path>`;
 
 		this.defsPathInnerHtml += `
 				<path id="textPath-${sliceCount}" d="${defTextPath}"></path>				
@@ -68,7 +61,7 @@ export class WheelSpinnerComponent {
 		this.textPathGroupInnerHtml += `
 			<text text-anchor="start">
 				<textPath href="#textPath-${sliceCount}">
-					<tspan fill="white" alignment-baseline="middle">${sliceItemName}</tspan>
+					<tspan fill="white" alignment-baseline="middle">${sliceItem.itemName}</tspan>
 				</textPath>
 			</text>
 		`;
@@ -84,8 +77,6 @@ export class WheelSpinnerComponent {
 		this.cumulativePercent = 0;
 		var sliceCount: number = 0;
 
-		console.clear();
-
 		if (this.sliceItems.length > 0) {
 			
 			const slicePercent = 1 / this.sliceItems.length;
@@ -98,7 +89,7 @@ export class WheelSpinnerComponent {
 			});		
 		} else {
 			sliceCount++;
-			this.drawSlice(1, sliceCount, .5, '', 'DFEEFC');
+			this.drawSlice(1, sliceCount, .5, new Item(0, '', '#DFEEFC'));
 		}
 
 		wheelInnerHtml += '<g>';

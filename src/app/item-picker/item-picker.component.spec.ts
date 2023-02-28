@@ -1,15 +1,15 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NamePickerComponent } from './name-picker.component';
+import { ItemPickerComponent } from './item-picker.component';
 
 describe('NamePickerComponent', () => {
-  let component: NamePickerComponent;
-  let fixture: ComponentFixture<NamePickerComponent>;
+  let component: ItemPickerComponent;
+  let fixture: ComponentFixture<ItemPickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NamePickerComponent ],
+      declarations: [ ItemPickerComponent ],
       imports: [ HttpClientModule ],
       providers: [ HttpClient ]
     })
@@ -17,7 +17,7 @@ describe('NamePickerComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NamePickerComponent);
+    fixture = TestBed.createComponent(ItemPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
