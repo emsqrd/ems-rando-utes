@@ -16,6 +16,16 @@ export class WheelSpinnerComponent {
 	private defsPathInnerHtml: string = '';
 	private textPathGroupInnerHtml: string = '';
 
+	isSpinning: boolean = false;
+	degree: number = Math.ceil(Math.random() * 3600);
+	
+	spinWheel() {
+
+		console.log(this.degree);
+		this.renderer.setStyle(this.svgContainer.nativeElement, 'transform', `rotate(${this.degree}deg)`);
+		this.degree += Math.ceil(Math.random() * 3600);
+	}
+
 	getCoordinatesForPercent(percent: number, radius: number) {
 		const x = Math.cos(2 * Math.PI * percent) * radius;
 		const y = Math.sin(2 * Math.PI * percent) * radius;
@@ -103,7 +113,6 @@ export class WheelSpinnerComponent {
 
 		wheelInnerHtml += this.textPathGroupInnerHtml;
 		wheelInnerHtml += '</g>';
-
 		
 		this.renderer.setProperty(this.svgContainer.nativeElement, 'innerHTML', wheelInnerHtml);
 	}

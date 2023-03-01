@@ -5,5 +5,6 @@
   "hp": ["Harry Potter","Hermoine Grainger","Ronald Weasley"],
   "letterkenny": ["Wayne","Katy","Daryl","Squirrelly Dan","Glen","Stewart","Roald","Reilly","Jonesy","Bonnie McMurray","Tanis","Mrs. McMurray","Mr. McMurray"],
   "food": ["Cheeseburger", "Pizza", "Sandwhich", "Calzone", "Spaghetti", "Soup", "Fish Fry", "Grilled Chicken"],
-  "greek_gods": ["Zeus", "Artemis", "Aphrodite", "Ares", "Hermes", "Poseidon"]
+  "greek_gods": ["Zeus", "Artemis", "Aphrodite", "Ares", "Hermes", "Poseidon"],
+  "schitts_creek": ["Johnny", "Moira", "David", "Alexis", "Roland", "Jocelyn", "Stevie", "Twyla", "Ted", "Patrick"]
 }
