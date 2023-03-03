@@ -3,7 +3,7 @@
   animation-name: rotate-animation;
   animation-iteration-count: 4;
   animation-timing-function: ease-in-out; */
-  transition: transform 5s ease-in-out;
+  transition: transform 5s ease;
 }
 
 #circle span {
@@ -34,4 +34,21 @@ body {
 
 .wheel-knob {
     transition: all .25s ease;
+}
+
+.parent {
+  display: grid;
+}
+
+.child {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.wheel-knob {
+  transition:all .25s ease;
+}
+
+.wheel-knob:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
