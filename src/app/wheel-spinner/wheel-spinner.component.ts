@@ -17,13 +17,24 @@ export class WheelSpinnerComponent {
 	private textPathGroupInnerHtml: string = '';
 
 	isSpinning: boolean = false;
-	degree: number = Math.ceil(Math.random() * 3600);
+	degree: number = 0;
+
+	transitionEnd(e: Event){
+		this.isSpinning = false;
+		console.log('transition end');
+	}
 	
 	spinWheel() {
 
-		console.log(this.degree);
-		this.renderer.setStyle(this.svgContainer.nativeElement, 'transform', `rotate(${this.degree}deg)`);
-		this.degree += Math.ceil(Math.random() * 3600);
+		if (!this.isSpinning){
+			this.isSpinning = true;
+			let oldDeg = this.degree;
+			this.degree += Math.ceil(Math.random() * 360);
+			this.degree += 4320;
+			console.log(`diff: ${this.degree - oldDeg}`);
+			this.renderer.setStyle(this.svgContainer.nativeElement, 'transform', `rotate(${this.degree}deg)`);
+		}
+
 	}
 
 	getCoordinatesForPercent(percent: number, radius: number) {
